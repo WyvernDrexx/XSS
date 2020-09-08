@@ -77,11 +77,11 @@ Remembering your previous XSS finding you try to write a comment,
 </script>
 ```
 
-Bamm! You get alerted with some _serious threat._
+Bang! You get an alert with some _serious threat._
 
-The biggest take from that comment is that now everyone who sees your comment will get an alert `Gimme your money`.
+The biggest take from that comment is that now everyone who sees your comment will get an alert `Gimme your money!`.
 
-Now, that is enough for you to get in trouble with the social media company. To learn more,
+Now, that's enough for you to get in trouble with the social media company. To learn more,
 [Read More..](./Persistent%20XSS.md)
 
 ### DOM-based XSS
@@ -101,9 +101,13 @@ if (query) {
 }
 ```
 
-The first line looks for URL parameter for `term` and the condition checks if it has any. If there is a query string then, write a input tag, `<input type='text' value='query string here'>` to the DOM.
+The first line looks for URL parameter for `term` and the condition checks if it has any. If there is a query string then, write a input tag,
 
-Now if you try to put script code from below,
+`<input type='text' value='query string here'>` 
+
+to the DOM.
+
+Now if you try to put the script,
 
 ```html
 <script>
@@ -111,24 +115,46 @@ Now if you try to put script code from below,
 </script>
 ```
 
-you won't get any alert instead you will get a input tag with `<script>alert("XSS")</script>` inside of it.
+you won't get any alert, instead you will get a input tag with `<script>alert("XSS")</script>` inside of it.
 
 It's normal because `document.write` is doing what it is told.
 
 Now it's time to think different!
 When we look in the code snippet from above. We notice that our search term is getting inside the `value` attribute of input tag.
-Look closely on how the HTML code is outputted by the JavaScript. What if we enter a  quote inside the search query?
+Look closely on how the HTML code is outputted by the JavaScript. 
+
+What if we enter a  quote inside the search query?
+
 If we put  quote inside query the resultant HTML output will be,
-`<input type='text' value='"'>`
-Hmm, Do you notice anything? The quote got pasted as it is? Now, what if we input single quote inside of it?
-`<input type='text' value='''>`
-Did you notice that HTML code got broken? Yeah! Something at last!
-Why did it broke? Because if you see our sigle quote got inside of the `value` attribute which caused the `value` to terminate early and left behind the third single quote.
+
+```html
+  <input type='text' value='"'>
+```
+
+Hmm, Do you notice anything? The quote got pasted as it is?
+
+ Now, what if we input single quote inside of it?
+
+```html
+  <input type='text' value='''>
+```
+
+Did you notice that HTML code got broken?
+
+Why did it even broke? Because, if you see our single quote got inside of the `value` attribute which caused the `value` to terminate early and left behind the third single quote and end tag.
+
 Now if we but `'>`, the  `value` will be `value=''>'`, the single quote will end `value` attribute and `>` will close the input tag which makes the last single quote and the closing tag out of input tag and becomes a general string.
 
+```html
+  <input type='text' value=''>'>
+```
+
 For final showdown, lets get XSS!
-Enter the following snippet in the url query string, `'><script>alert("XSS")</script>`.
-Booyah! We get **XSS!**
+Enter the following snippet in the url query string, 
+
+`'><script>alert("XSS")</script>`
+
+Yeah! We get **XSS!**
 What actually happened?
 The input tag now becomes,
 
@@ -136,6 +162,9 @@ The input tag now becomes,
   <input type='text' value=''><script>alert("XSS")</script>'>
 ```
 
-The last quote and the closing tag can be seen in the end.
+The `'>` ended the input tag properly and then we add `script` following it which got executed by the browser.
+The last quote and the closing tag can be seen in the end left behind. If you want you can even hide them using some tricks!
+
+Now that's your job!
 
 To learn more,[Read More..](./DOM-based%20XSS.md)
