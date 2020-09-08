@@ -13,13 +13,42 @@ The malicious code are written prominently in **JavaScript** but **Java**, **HTM
 
 ## Types of XSS
 
-There is any standardized classification of XSS, but the most prominent are **Reflected XSS**, **Persistent XSS** and **DOM Based XSS**.
+There isn't any standardized classification of XSS, but the most prominent are **Reflected XSS**, **Persistent XSS** and **DOM Based XSS**.
 
 ### Reflected XSS
 
 >**Reflected XSS** are type of XSS Vulnerabilities that arises when a user input is taken in a HTTP request by the server and is immediately included in HTTP response without sanitizing it properly.
 
 It is the most simplest form of XSS vulnerability that are  found in Web Applications.
+
+**Example:**
+Let's say there is a e-commerce website that lists all the available products on the home page. Now, you need to search for a nice fancy laptop for yourself. In the search input field you type `laptop`. As a result you get list of all the laptops available on the site.
+
+You notice that on the URL bar you have your search query as `https://example-site.com/search?term=laptop`.
+And that query term is reflected in the page as `Here are the results for 'laptop'`.
+
+Now, what if you insert,
+
+```html
+  <h1>Laptop</h1>
+```  
+
+Bang! After inserting above code  you see that your HTML code gets rendered by the browser. In our case, you see heading of **Laptop**. 
+
+What if you insert,
+
+```html
+  <script>alert("XSS")</script>
+```
+
+Hmm, any guesses? When you enter the above code you get greeted with **XSS**.
+**Hooray! You just found an XSS Vulnerability!**
+But, the major problem with it is that only you can see and if you want anyone else to see your victory you have to tell them to enter it. So boring.
+
+Hmm, did you notice that URL param `term`?. Yes, now the only thing you need to do is send the URL containing the search query term the victim.
+`https://https://example-site.com/search?term=<script>alert("XSS")</script>`
+When they click on this they will be greeted with **XSS**.
+
 [Read More..](./Reflected%20XSS.md)
 
 ### Persistent XSS
