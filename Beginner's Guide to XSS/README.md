@@ -22,7 +22,7 @@ There isn't any standardized classification of XSS, but the most prominent are *
 It is the most simplest form of XSS vulnerability that are  found in Web Applications.
 
 **Example:**
-Let's say there is a e-commerce website that lists all the available products on the home page. Now, you need to search for a nice fancy laptop for yourself. In the search input field you type `laptop`. As a result you get list of all the laptops available on the site.
+Let's say there is an e-commerce website now, you need to search for a nice fancy laptop for yourself. In the search input field you enter `laptop`. As a result you get list of all the laptops available on the site.
 
 You notice that on the URL bar you have your search query as `https://example-site.com/search?term=laptop`.
 And that query term is reflected in the page as `Here are the results for 'laptop'`.
@@ -41,14 +41,14 @@ What if you insert,
   <script>alert("XSS")</script>
 ```
 
-Hmm, any guesses? When you enter the above code you get greeted with **XSS**.
+Hmm, any guesses? When you enter the above code you are greeted with **XSS**.
 **Hooray! You just found an XSS Vulnerability!**
-But, the major problem with it is that only you can see and if you want anyone else to see your victory you have to tell them to enter it. So boring.
 
-Hmm, did you notice that URL param `term`?. Yes, now the only thing you need to do is send the URL containing the search query term the victim.
+But, the major problem with it is that, only you can see the alert and if you want anyone else to see your victory you have to tell them to enter the above snippet. So boring.
+
+Hmm, did you notice that URL param `term`?. Yes, now the only thing you need to do is send the URL containing the search query term to your victim.
 `https://https://example-site.com/search?term=<script>alert("XSS")</script>`
-When they click on this they will be greeted with **XSS**.
-
+When they visit the URL they will be greeted with **XSS**. This isn't any harmful snippet but this is exactly how an malicious attacker would design his attack.
 [Read More..](./Reflected%20XSS.md)
 
 ### Persistent XSS
