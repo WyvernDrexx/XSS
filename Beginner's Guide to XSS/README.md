@@ -141,7 +141,7 @@ Hmm, Do you notice anything? The quote got pasted as it is?
 
 Did you notice that HTML code got broken?
 
-Why did it even broke? Because, if you see our single quote got inside of the `value` attribute which caused the `value` to terminate early and left behind the third single quote and end tag.
+Why did it even broke? Because, if you see, our single quote got inside of the `value` attribute which caused the `value` to terminate early and left behind `'>`.
 
 Now if we but `'>`, the  `value` will be `value=''>'`, the single quote will end `value` attribute and `>` will close the input tag which makes the last single quote and the closing tag out of input tag and becomes a general string.
 
@@ -150,7 +150,7 @@ Now if we but `'>`, the  `value` will be `value=''>'`, the single quote will end
 ```
 
 For final showdown, lets get XSS!
-Enter the following snippet in the url query string, 
+We enter the following snippet in the url query string,
 
 `'><script>alert("XSS")</script>`
 
@@ -162,8 +162,8 @@ The input tag now becomes,
   <input type='text' value=''><script>alert("XSS")</script>'>
 ```
 
-The `'>` ended the input tag properly and then we add `script` following it which got executed by the browser.
-The last quote and the closing tag can be seen in the end left behind. If you want you can even hide them using some tricks!
+The `'>` ended the input tag properly and then, we immediately add `script` following it which gets executed by the browser.
+ The `>` can be seen in the end left behind. If you want you can even hide them using some extra HTML!
 
 Now that's your job!
 
