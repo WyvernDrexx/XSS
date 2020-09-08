@@ -87,8 +87,7 @@ Now, that's enough for you to get in trouble with the social media company. To l
 ### DOM-based XSS
 
 > In **DOM-based XSS**, the injected malicious code is reflected directly in the client side code without it ever reaching the server.
-
-The malicious code is injected into the input which the client side JavaScript reflects directly to the page without any server queries. If, the malicious input isn't sanitized properly by the client side code then the malicious code gets placed in the page as normal JS or HTML code and gets executed by the browser.
+>The malicious code is injected into the input which the client side JavaScript reflects directly to the page without any server queries. If, the malicious input isn't sanitized properly by the client side code then the malicious code gets placed in the page as normal JS or HTML code and gets executed by the browser.
 
 **Example:**
 
@@ -101,7 +100,7 @@ if (query) {
 }
 ```
 
-The first line looks for URL parameter for `term` and the condition checks if it has any. If there is a query string then, write a input tag,
+The first line looks for URL query parameter `term` and the condition checks if it has any. If there is a query string then, write a input tag,
 
 `<input type='text' value='query string here'>` 
 
@@ -143,7 +142,7 @@ Did you notice that HTML code got broken?
 
 Why did it even broke? Because, if you see, our single quote got inside of the `value` attribute which caused the `value` to terminate early and left behind `'>`.
 
-Now if we but `'>`, the  `value` will be `value=''>'`, the single quote will end `value` attribute and `>` will close the input tag which makes the last single quote and the closing tag out of input tag and becomes a general string.
+Now if we but `'>`, the  `value` will be `value=''>'`, the single quote will end `value` attribute and `>` will close the input tag which makes the last single quote and the closing tag out of input tag and makes it a general string.
 
 ```html
   <input type='text' value=''>'>
@@ -163,7 +162,7 @@ The input tag now becomes,
 ```
 
 The `'>` ended the input tag properly and then, we immediately add `script` following it which gets executed by the browser.
- The `>` can be seen in the end left behind. If you want you can even hide them using some extra HTML!
+ The `'>` can be seen in the end left behind. If you want you can even hide them using some extra HTML!
 
 Now that's your job!
 
