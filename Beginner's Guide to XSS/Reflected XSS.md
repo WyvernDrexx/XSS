@@ -42,7 +42,7 @@ Let's say we have a evil website `https://evil-site.com`.
 
 What we try to do is send a HTTP request to our evil site with cookies in the URL parameter and later retrieve it. But, how?
 
-What if we sent it using a HTTP Request from an image! 
+What if we sent it using a HTTP Request from an image!
 
 Like,
 
