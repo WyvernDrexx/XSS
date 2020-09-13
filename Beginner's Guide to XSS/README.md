@@ -165,5 +165,3 @@ The `'>` ended the input tag properly and then, we immediately add `script` foll
  The `'>` can be seen in the end left behind. If you want you can even hide them using some extra HTML!
 
 Now that's your job!
-
-To learn more,[Read More..](./DOM-based%20XSS.md)
